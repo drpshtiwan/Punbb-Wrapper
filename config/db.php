@@ -1,8 +1,5 @@
 <?php
-
-// require __DIR__.'/../../config.php';
-
-if(!function_exists('setConfig')) return false;
+if(!function_exists('envi')) return false;
 
 setConfig('mysql',[
     'driver'    => 'mysql',
