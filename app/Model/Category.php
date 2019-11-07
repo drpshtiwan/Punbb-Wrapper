@@ -9,7 +9,7 @@ class Category extends Eloquent
     
     public function forums()
     {
-        return $this->hasMany(Forum::class,'id','id');
+        return $this->hasMany(Forum::class,'cat_id','id');
     }
 
 }

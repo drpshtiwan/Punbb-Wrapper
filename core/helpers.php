@@ -1,6 +1,10 @@
 <?php
 
 use App\Utils\Config;
+use Illuminate\Pagination\Paginator;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+
 
 function config($key)
 {
@@ -20,4 +24,28 @@ function envi($key,$value = null)
     }
 
     return $_ENV[$key];
+}
+
+
+
+function request()
+{
+    $request = Request::createFromGlobals();
+    return $request->query;
+}
+
+function responseJSON($data = [])
+{
+    $response = new JsonResponse();
+    $response->setData($data);
+    $response->send();
+}
+
+
+function makePagination()
+{
+    $page = (request()->get('page') != null ) ? intval(request()->get('page')) : 1;
+    Paginator::currentPageResolver(function () use ($page) {
+        return $page;
+    });
 }

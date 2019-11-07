@@ -2,28 +2,23 @@
 
 namespace App\Controllers;
 
-use App\Model\Forum;
+use App\Model\Post;
+
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
-class ForumController
+class PostController
 {
-    public function index()
+    public function index(Request $request, Response $response)
     {    
-        $forum = Forum::paginate(25);
-        dd($forum);
+        $forum = Post::paginate(25);
+        $response->getBody()->write(json_encode($forum));
+        return $response->withHeader('Content-Type','application/json');
     }
-
-    // public function index(Request $request, Response $response)
-    // {    
-    //     $forum = Forum::paginate(25);
-    //     $response->getBody()->write(json_encode($forum));
-    //     return $response->withHeader('Content-Type','application/json');
-    // }
     
     public function show(Request $request, Response $response,$args)
     {    
-        $forum = Forum::find($args['id']);
+        $forum = Post::find($args['id']);
         $response->getBody()->write(json_encode($forum));
         return $response->withHeader('Content-Type','application/json');
     }
@@ -32,8 +27,7 @@ class ForumController
     {    
         dump($request->getQueryParams());
         die();
-        $forum = Forum::find($args['id']);
-        // $forum->forum_name = 'Hello'
+        $forum = Post::find($args['id']);
         $response->getBody()->write(json_encode($forum));
         return $response->withHeader('Content-Type','application/json');
     }

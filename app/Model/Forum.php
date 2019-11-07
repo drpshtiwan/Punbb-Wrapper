@@ -14,7 +14,7 @@ class Forum extends Eloquent
 
     public function category()
     {
-        return $this->belongsTo(Category::class,'id','id');
+        return $this->belongsTo(Category::class,'cat_id','id');
     }
 
 }
