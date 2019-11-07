@@ -3,33 +3,28 @@
 namespace App\Controllers;
 
 use App\Model\Post;
-
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
+use App\Model\Topic;
+use App\Resources\PostResource;
 
 class PostController
 {
-    public function index(Request $request, Response $response)
+
+    public function topic($id)
     {    
-        $forum = Post::paginate(25);
-        $response->getBody()->write(json_encode($forum));
-        return $response->withHeader('Content-Type','application/json');
+        if($id == null) return;
+        makePagination();
+        $posts = Topic::find($id)->posts()->paginate(20);
+        responseJSON(PostResource::collection($posts));
+    }
+
+    public function userPosts($poster)
+    {    
+        if($poster == null) return;
+        makePagination();
+        $posts = Post::where('poster',$poster)->orderBy('posted','DESC')->paginate(20);
+        responseJSON(PostResource::collection($posts));
     }
     
-    public function show(Request $request, Response $response,$args)
-    {    
-        $forum = Post::find($args['id']);
-        $response->getBody()->write(json_encode($forum));
-        return $response->withHeader('Content-Type','application/json');
-    }
     
-    public function update(Request $request, Response $response,$args)
-    {    
-        dump($request->getQueryParams());
-        die();
-        $forum = Post::find($args['id']);
-        $response->getBody()->write(json_encode($forum));
-        return $response->withHeader('Content-Type','application/json');
-    }
     
 }

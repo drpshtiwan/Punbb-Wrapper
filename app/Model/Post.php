@@ -8,6 +8,6 @@ class Post extends Eloquent
 {
     public function topic()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Topic::class);
     }
 }

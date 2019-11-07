@@ -14,6 +14,7 @@ class UserResource
             'username' => $item->username,
             'realname' => $item->realname,
             'title' => $item->title,
+            'num_posts' => $item->num_posts,
             'signature' => $item->signature,
             'registered' => Date::get($item->registered),
             'facebook' => $item->facebook,
