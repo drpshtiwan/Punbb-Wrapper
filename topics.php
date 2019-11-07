@@ -6,11 +6,14 @@ require __DIR__."/core/bootstrap.php";
 
 $topic = new TopicController;
 
+$type = request()->get('type');
 
-
-if(request()->get('id') != null) {
-    $topic->show(request()->get('id'));
-}else{
-    $topic->index();
+switch($type)
+{
+    case 'list':
+        $topic->index();
+    case 'show':
+        $topic->show(request()->get('id'));
+    case 'user':
+        $topic->userTopics(request()->get('username'));
 }
-

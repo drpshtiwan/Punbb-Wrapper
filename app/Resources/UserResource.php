@@ -2,9 +2,7 @@
 
 namespace App\Resources;
 
-use App\Model\Forum;
-use App\Model\User;
-use Carbon\Carbon;
+use App\Utils\Date;
 
 class UserResource 
 {
@@ -17,7 +15,7 @@ class UserResource
             'realname' => $item->realname,
             'title' => $item->title,
             'signature' => $item->signature,
-            'registered' => Carbon::createFromFormat('U',$item->registered)->format('Y-m-d'),
+            'registered' => Date::get($item->registered),
             'facebook' => $item->facebook,
             'twitter' => $item->twitter,
             'linkedin' => $item->linkedin,

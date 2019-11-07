@@ -2,10 +2,6 @@
 
 namespace App\Resources;
 
-use App\Model\Forum;
-use App\Model\User;
-use Carbon\Carbon;
-
 class CategoryResource 
 {
 

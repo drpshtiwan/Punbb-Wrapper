@@ -17,14 +17,19 @@ class TopicController
     
     public function show($id)
     {    
+        if($id == null) return;
         $topic = Topic::find($id);
-    
         responseJSON(TopicResource::single($topic));
     }
-    
-    public function update()
+
+    public function userTopics($poster)
     {    
-        
+        if($poster == null) return;
+        makePagination();
+        $topics = Topic::where('poster',$poster)->orderBy('id','DESC')->paginate(20);
+        responseJSON(TopicResource::collection($topics));
     }
+    
+    
     
 }
