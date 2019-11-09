@@ -5,10 +5,9 @@ namespace App\Resources;
 use App\Model\User;
 use App\Utils\Date;
 
-class PostResource 
+class PostResource extends Resource
 {
-
-    protected static function map($item)
+    public static function map($item)
     {
         return [
             'id' => $item->id,
@@ -20,19 +19,5 @@ class PostResource
             'topic' => TopicResource::single($item->topic),
         ];
     }
-
-    public static function single($item)
-    {
-        return self::map($item);
-    }
-
-    public static function collection($items)
-    {
-        return $items->map(function($item)
-        {
-            return self::map($item);
-        });
-    }
-    
 }
 

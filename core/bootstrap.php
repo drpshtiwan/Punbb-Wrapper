@@ -5,6 +5,10 @@ use Symfony\Component\Dotenv\Dotenv;
 use Slim\Factory\AppFactory;
 use Slim\Middleware\ErrorMiddleware;
 
+if (!defined('FORUM_ROOT')) define('FORUM_ROOT', __DIR__.'/../../');
+if(!function_exists('_forum_remove_bad_characters')) {
+    require FORUM_ROOT.'include/common.php';
+}
 
 require  __DIR__.'/../vendor/autoload.php';
 require __DIR__."/helpers.php";

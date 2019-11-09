@@ -4,15 +4,15 @@ namespace App\Resources;
 
 use App\Utils\Date;
 
-class UserResource 
+class UserResource extends Resource
 {
-
-    protected static function map($item)
+    public static function map($item)
     {
         return [
             'id' => $item->id,
             'username' => $item->username,
             'realname' => $item->realname,
+            'avatar' => $item->avatar,
             'title' => $item->title,
             'num_posts' => $item->num_posts,
             'signature' => $item->signature,
@@ -20,23 +20,8 @@ class UserResource
             'facebook' => $item->facebook,
             'twitter' => $item->twitter,
             'linkedin' => $item->linkedin,
-            'skype' => $item->skype,
-            
+            'skype' => $item->skype,            
         ];
-    }
-
-    public static function single($item)
-    {
-        return self::map($item);
-    }
-
-    public static function collection($items)
-    {
-        return $items->map(function($item)
-        {
-            return self::map($item);
-        });
-    }
-    
+    }   
 }
 

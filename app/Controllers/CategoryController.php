@@ -9,11 +9,10 @@ class CategoryController
 {
     public function index()
     {    
-        makePagination();
-        $topics = Category::orderBy('disp_position','ASC')->get();
-        responseJSON(CategoryResource::collection($topics));
+        $categories = Category::orderBy('disp_position','ASC')->get();
+        $categories->filter(function ($cat){
+            return $cat->forums->count() > 0;
+        });
+        responseJSON(CategoryResource::collection($categories));
     }
-    
-    
-    
 }

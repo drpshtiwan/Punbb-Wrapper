@@ -10,7 +10,7 @@ $type = request()->get('type');
 
 switch($type)
 {
-    case 'popular':
-        $user->popular();
+    case 'active':
+        $user->active();
     
 }

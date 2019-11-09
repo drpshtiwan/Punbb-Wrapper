@@ -16,4 +16,6 @@ switch($type)
         $topic->show(request()->get('id'));
     case 'user':
         $topic->userTopics(request()->get('username'));
+    default:
+        return ;
 }

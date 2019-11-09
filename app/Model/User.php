@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Model  as Eloquent;
 
 class User extends Eloquent
 {
-
-    // protected $primaryKey = 'username';
-    
     public function group()
     {
         return $this->belongsTo(Group::class,'group_id','g_id');
@@ -17,11 +14,12 @@ class User extends Eloquent
 
     public static function getByUsername($username)
     {
-        return self::find($username);
+        return self::where('username',$username)->first();
     }
 
     public static function byUsernameResource($username)
     {
-        return UserResource::single(self::getByUsername($username));
+        $user = self::getByUsername($username);
+        return ($user != null) ? UserResource::single($user):null;
     }
 }
