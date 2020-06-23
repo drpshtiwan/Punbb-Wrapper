@@ -6,7 +6,7 @@
         "slim/slim": "4.0.0",
         "slim/psr7": "^0.6.0",
         "illuminate/pagination": "^6.3",
-        "symfony/http-foundation": "^4.3",
+        "symfony/http-foundation": "^4.3.8",
         "nesbot/carbon": "^2.26"
     },
     "autoload": {
