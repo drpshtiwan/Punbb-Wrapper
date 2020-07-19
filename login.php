@@ -12,6 +12,4 @@ switch($type)
 {
     case 'me':
         $login->me();    
-    case 'links':
-        $login->links();    
 }

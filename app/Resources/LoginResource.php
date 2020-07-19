@@ -3,7 +3,6 @@
 namespace App\Resources;
 
 use App\Model\User;
-use App\Utils\Date;
 
 class LoginResource extends Resource
 {

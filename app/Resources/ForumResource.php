@@ -8,11 +8,12 @@ class ForumResource extends Resource
     {
         return [
             'id' => $item->id,
-            'name' => $item->forum_name,
-            'forum_desc' => $item->forum_desc,
+            'name' => parent::clean($item->forum_name),
+            'forum_desc' => parent::clean($item->forum_desc),
             'cat_id' => $item->cat_id,
             'num_posts' => $item->num_posts,
             'num_topics' => $item->num_topics,
+            'isParent' => ($item->om_subforums_parent_id == 0),
         ];
     }   
 }

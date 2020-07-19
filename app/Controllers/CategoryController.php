@@ -9,10 +9,9 @@ class CategoryController
 {
     public function index()
     {    
-        $categories = Category::orderBy('disp_position','ASC')->get();
-        $categories->filter(function ($cat){
+        $categories = Category::orderBy('disp_position','ASC')->get()->filter(function ($cat){
             return $cat->forums->count() > 0;
-        });
+        })->values();
         responseJSON(CategoryResource::collection($categories));
     }
 }

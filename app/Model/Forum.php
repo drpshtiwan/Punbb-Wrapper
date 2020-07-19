@@ -12,9 +12,17 @@ class Forum extends Eloquent
         return $this->hasMany(Topic::class);
     }
 
+
+
     public function category()
     {
         return $this->belongsTo(Category::class,'cat_id','id');
+    }
+
+        
+    public function perms()
+    {
+        return $this->hasMany(Forumperms::class);
     }
 
 }

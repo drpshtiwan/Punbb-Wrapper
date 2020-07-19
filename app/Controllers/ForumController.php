@@ -8,18 +8,12 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class ForumController
 {
-    public function index()
+    public function index(Request $request, Response $response)
     {    
         $forum = Forum::paginate(25);
-        dd($forum);
+        $response->getBody()->write(json_encode($forum));
+        return $response->withHeader('Content-Type','application/json');
     }
-
-    // public function index(Request $request, Response $response)
-    // {    
-    //     $forum = Forum::paginate(25);
-    //     $response->getBody()->write(json_encode($forum));
-    //     return $response->withHeader('Content-Type','application/json');
-    // }
     
     public function show(Request $request, Response $response,$args)
     {    
@@ -33,7 +27,6 @@ class ForumController
         dump($request->getQueryParams());
         die();
         $forum = Forum::find($args['id']);
-        // $forum->forum_name = 'Hello'
         $response->getBody()->write(json_encode($forum));
         return $response->withHeader('Content-Type','application/json');
     }

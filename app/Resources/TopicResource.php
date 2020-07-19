@@ -3,6 +3,7 @@
 namespace App\Resources;
 
 use App\Model\Forum;
+use App\Model\Post;
 use App\Model\User;
 use App\Utils\Date;
 
@@ -13,15 +14,15 @@ class TopicResource extends Resource
     {
         return [
             'id' => $item->id,
-            'subject' => $item->subject,
-            'posted' => Date::get($item->posted),
+            'subject' => parent::clean($item->subject),
             'num_replies' => $item->num_replies,
             'num_views' => $item->num_views,
             'sticky' => $item->sticky,
             'closed' => $item->closed,
+            'hasNoreplies' => ($item->first_post_id == $item->last_post_id),
+            'last_post' => PostResource::single(Post::find($item->last_post_id)),
             'forum' => ForumResource::single(Forum::find($item->forum_id)),
             'poster' => User::byUsernameResource($item->poster),
-            'last_poster' => User::byUsernameResource($item->last_poster),
         ];
     }
 }

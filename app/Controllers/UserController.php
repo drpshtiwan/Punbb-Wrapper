@@ -10,7 +10,7 @@ class UserController
 
     public function active()
     {    
-        $users = User::orderBy('num_posts','DESC')->take(10)->get();
+        $users = User::orderBy('num_posts','DESC')->take(12)->get();
         responseJSON(UserResource::collection($users));
     }
    

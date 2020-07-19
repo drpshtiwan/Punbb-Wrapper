@@ -7,11 +7,13 @@ require __DIR__."/core/bootstrap.php";
 $topic = new TopicController;
 
 $type = request()->get('type');
+$style = request()->get('style'); 
+$forum = request()->get('forum'); 
 
 switch($type)
 {
     case 'list':
-        $topic->index();
+        $topic->index($style,$forum);
     case 'show':
         $topic->show(request()->get('id'));
     case 'user':

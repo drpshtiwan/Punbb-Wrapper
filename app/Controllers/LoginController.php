@@ -12,8 +12,4 @@ class LoginController
         responseJSON(LoginResource::single((object)$forum_user));
     }  
 
-    public function links()
-    {
-        
-    }
 }
