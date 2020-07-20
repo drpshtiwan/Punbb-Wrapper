@@ -17,4 +17,5 @@ class Topic extends Eloquent
         return $this->hasMany(Post::class);
     }
     
+    
 }
