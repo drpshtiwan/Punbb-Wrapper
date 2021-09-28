@@ -2,13 +2,14 @@
 
 namespace App\Resources;
 
+use App\Model\PMMessage;
 use App\Utils\Date;
 
 class UserResource extends Resource
 {
     public static function map($item)
     {
-        return [
+        $user = [
             'id' => $item->id,
             'username' => parent::clean($item->username),
             'realname' => parent::clean($item->realname),
@@ -20,8 +21,17 @@ class UserResource extends Resource
             'facebook' => $item->facebook,
             'twitter' => $item->twitter,
             'linkedin' => $item->linkedin,
-            'skype' => $item->skype,            
-        ];
-    }   
-}
+            'skype' => $item->skype,
 
+        ];
+
+        // if (pun_pm_messages) table doesn't exist skip this...
+        try {
+            $user['new_messages'] = PMMessage::where([['read_at', "0"], ['receiver_id', $item->id]])->count() ? true : false;
+        } catch (\Throwable $th) {
+            // throw $th;
+        }
+
+        return $user;
+    }
+}
