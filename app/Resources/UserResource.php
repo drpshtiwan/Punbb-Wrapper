@@ -2,6 +2,7 @@
 
 namespace App\Resources;
 
+use App\Model\Extension;
 use App\Model\PMMessage;
 use App\Utils\Date;
 
@@ -9,6 +10,7 @@ class UserResource extends Resource
 {
     public static function map($item)
     {
+        global $forum_user;
         $user = [
             'id' => $item->id,
             'username' => parent::clean($item->username),
@@ -25,11 +27,11 @@ class UserResource extends Resource
 
         ];
 
-        // if (pun_pm_messages) table doesn't exist skip this...
-        try {
-            $user['new_messages'] = PMMessage::where([['read_at', "0"], ['receiver_id', $item->id]])->count() ? true : false;
-        } catch (\Throwable $th) {
-            // throw $th;
+        // if pun_pm installed and enabled, showing numbers of new messages just for logged in users
+        $pm_ext = Extension::where([['id', 'pun_pm'], ['disabled', 0]])->count();
+
+        if ($item->id == $forum_user['id'] && $pm_ext) {
+            $user['num_new_messages'] = PMMessage::where([['read_at', 0], ['receiver_id', $item->id]])->count();
         }
 
         return $user;
